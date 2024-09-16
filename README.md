@@ -1,16 +1,14 @@
-<p align="center">
+<div align="center">
 
 ![Logo](https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png)
 
-</p>
+</div>
 
 # LeetCode Solutions
 
-Here will be al of my personal solution to some leetcode challenges
-the solutions here are my personal so they might not be the most efficent ones
-from time to time ill try and perfect some of them if i feel like i can do better
+Here, I will share my personal solutions to various LeetCode challenges. These solutions are my own and may not always be the most efficient. From time to time, I might revisit and improve them if I believe there's a better approach.
 
-## Run Locally
+## Run **Locally**
 
 Clone the project
 
