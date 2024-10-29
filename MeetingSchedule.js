@@ -25,5 +25,5 @@ class Solution {
 }
 
 let sol = new Solution();
-let intervals = [(0, 30), (5, 10), (15, 20)];
-sol.canAttendMeetings(intervals);
+let interval = [(0, 30), (5, 10), (15, 20)];
+sol.canAttendMeetings(interval);
