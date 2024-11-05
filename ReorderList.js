@@ -1,12 +1,10 @@
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     constructor(val = 0, next = null) {
- *         this.val = val;
- *         this.next = next;
- *     }
- * }
- */
+// Definition for singly-linked list node
+class ListNode {
+  constructor(val = 0, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
 
 function reorderList(head) {
   if (!head || !head.next) return;
@@ -41,8 +39,18 @@ function reorderList(head) {
   }
 }
 
-let input = reorderList((head = [2, 4, 6, 8]));
+// Manually creating the linked list [2, 4, 6, 8]
+let head = new ListNode(2);
+head.next = new ListNode(4);
+head.next.next = new ListNode(6);
+head.next.next.next = new ListNode(8);
 
-let output = head;
+// Run the reorderList function
+reorderList(head);
 
-console.log(input);
+// Print the reordered list
+let current = head;
+while (current) {
+  process.stdout.write(current.val + (current.next ? ' -> ' : '\n'));
+  current = current.next;
+}
