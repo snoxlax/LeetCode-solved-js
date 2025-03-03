@@ -21,12 +21,11 @@ function hasCycle(head) {
   return bool;
 }
 
-// Create a linked list: 1 -> 2 -> 3 -> 4 -> 2 (loop back to node with value 2)
 const headWithLoop = new ListNode(1);
 headWithLoop.next = new ListNode(2);
 headWithLoop.next.next = new ListNode(3);
 headWithLoop.next.next.next = new ListNode(4);
-headWithLoop.next.next.next.next = headWithLoop.next; // Create a loop
+headWithLoop.next.next.next.next = headWithLoop.next;
 
 const headWithoutLoop = new ListNode(1);
 headWithoutLoop.next = new ListNode(2);
