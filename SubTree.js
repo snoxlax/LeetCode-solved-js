@@ -29,5 +29,21 @@ class Solution {
     }
     return false;
   }
+  //Another option for a solution instead of the sameTree function
+  dfs(pr, qr) {
+    if (pr === null && qr === null) {
+      return true;
+    }
+
+    if (pr === null || qr === null) {
+      return false;
+    }
+
+    if (pr.val !== qr.val) {
+      return false;
+    }
+
+    return true && this.dfs(pr.left, qr.left) && this.dfs(pr.right, qr.right);
+  }
 }
 ///working
