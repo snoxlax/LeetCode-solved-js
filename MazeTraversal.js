@@ -1,10 +1,10 @@
 // --- TEST GRID ---
 const grid = [
-  ['S', '.', '.', '#', '.', '.', '.'],
+  ['S', '.', '.', '#', '.', '.', 'E'],
   ['#', '#', '.', '#', '.', '#', '.'],
   ['.', '.', '.', '.', '.', '#', '.'],
   ['.', '#', '#', '#', '.', '#', '.'],
-  ['.', '.', '.', '.', '.', '.', 'E'],
+  ['.', '.', '.', '.', '.', '.', '.'],
 ];
 
 const grid2 = [
@@ -102,8 +102,7 @@ function findPathBFS(grid) {
     return [];
   }
 
-  const path = [];
-  const result = bfs(grid, start[0], start[1], path, end);
+  const result = bfs(grid, start, end);
 
   if (result) {
     console.log('Path found:', result);
@@ -114,9 +113,13 @@ function findPathBFS(grid) {
   }
 }
 
-function bfs(grid, r, c, path, end) {
+function bfs(grid, start, end) {
+  let [r, c] = start;
+  let path = [];
   const rows = grid.length;
   const cols = grid[0].length;
+  let key = `${r},${c}`;
+  let vis = new Set();
 
   // Direction array for moving up, down, left, right
   const dir = [
@@ -127,36 +130,39 @@ function bfs(grid, r, c, path, end) {
   ];
 
   // Initialize queue with starting position and path
-  const queue = [[r, c, [[r, c]]]];
+  const queue = [[r, c, [start]]];
 
   // Visited matrix to keep track of visited cells
-  const visited = new Array(rows).fill().map(() => new Array(cols).fill(false));
-  visited[r][c] = true;
+  // const visited = new Array(rows).fill().map(() => new Array(cols).fill(false));
+  // visited[r][c] = true;
+  vis.add(key);
 
   while (queue.length > 0) {
-    const [x, y, path] = queue.shift();
+    [r, c, path] = queue.shift();
 
     // Check if current cell is the endpoint 'E'
-    if (grid[x][y] === 'E') {
+    if (r === end[0] && c === end[1]) {
       return path;
     }
 
     // Explore neighboring cells
     for (const [dx, dy] of dir) {
-      const nx = x + dx;
-      const ny = y + dy;
+      const dr = r + dx;
+      const dc = c + dy;
 
       // Check if the new cell is within bounds, not a wall, and not visited
       if (
-        nx >= 0 &&
-        nx < rows &&
-        ny >= 0 &&
-        ny < cols &&
-        grid[nx][ny] !== '#' &&
-        !visited[nx][ny]
+        dr >= 0 &&
+        dr < rows &&
+        dc >= 0 &&
+        dc < cols &&
+        grid[dr][dc] !== '#' &&
+        // !visited[dr][dc]
+        !vis.has(`${dr},${dc}`)
       ) {
-        visited[nx][ny] = true;
-        queue.push([nx, ny, [...path, [nx, ny]]]);
+        // visited[dr][dc] = true;
+        vis.add(`${dr},${dc}`);
+        queue.push([dr, dc, [...path, [dr, dc]]]);
       }
     }
   }
@@ -170,4 +176,3 @@ function bfs(grid, r, c, path, end) {
 // console.log(dfsResult);
 
 const bfsResult = findPathBFS(grid);
-console.log(bfsResult);
